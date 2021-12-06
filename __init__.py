@@ -15,19 +15,22 @@ class solaireSkill(MycroftSkill):
 
     @intent_handler('sun.intent')
     def handle_not_are_you_intent(self, message):
-        self.speak_dialog("sun")
         serA = serial.Serial('/dev/ttyACM0', 9600, timeout=1)
-        serA.flush()
-        serA.write(b"sun")
         serB = serial.Serial('/dev/ttyACM1', 9600, timeout=1)
-        serB.flush()
-        serB.write(b"sun")        
         serC = serial.Serial('/dev/ttyACM2', 9600, timeout=1)
+        serD = serial.Serial('/dev/ttyACM3', 9600, timeout=1)
+        time.sleep(0.5)
+        serA.flush()
+        serB.flush()
         serC.flush()
+        serD.flush()
+        time.sleep(0.5)
+        serA.write(b"sun")
+        serB.write(b"sun")        
         serC.write(b"sun")
-        #serD = serial.Serial('/dev/ttyACM3', 9600, timeout=1)
-        #serD.flush()
-        #serD.write(b"sun")    
+        serD.write(b"sun")  
+        time.sleep(0.5)
+        self.speak_dialog("praise the sun")
 
     def stop(self):
         pass
